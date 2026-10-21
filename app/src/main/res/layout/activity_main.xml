@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_default_background"
     tools:context=".MainActivity">
 
     <TextView
@@ -39,7 +38,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:labelFor="@id/municipalityInput"
         android:text="@string/input_label"
         android:textColor="@color/color_text_dark"
         android:textSize="16sp"
