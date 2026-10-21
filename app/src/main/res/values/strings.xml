@@ -7,4 +7,5 @@
     <string name="input_error">Enter Beijing, Shanghai, Tianjin or Chongqing.</string>
     <string name="missing_municipality">No valid municipality was provided.</string>
     <string name="visit_site">Visit site</string>
+    <string name="city_photo">%1$s city view</string>
 </resources>

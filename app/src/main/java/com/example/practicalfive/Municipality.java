@@ -1,12 +1,16 @@
 package com.example.practicalfive;
 
 import android.os.Bundle;
+import android.content.res.ColorStateList;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
@@ -32,7 +36,62 @@ public class Municipality extends AppCompatActivity {
             return;
         }
 
+        showMunicipality(name);
+    }
+
+    private void showMunicipality(String name) {
+        int index;
+        int image;
+        int color;
+        switch (name) {
+            case "Beijing":
+                index = 0;
+                image = R.drawable.beijing;
+                color = R.color.municipality_beijing;
+                break;
+            case "Shanghai":
+                index = 1;
+                image = R.drawable.shanghai;
+                color = R.color.municipality_shanghai;
+                break;
+            case "Chongqing":
+                index = 2;
+                image = R.drawable.chongqing;
+                color = R.color.municipality_chongqing;
+                break;
+            case "Tianjin":
+                index = 3;
+                image = R.drawable.tianjin;
+                color = R.color.municipality_tianjin;
+                break;
+            default:
+                finish();
+                return;
+        }
+
+        int accent = ContextCompat.getColor(this, color);
+        int textColor = ContextCompat.getColor(this, name.equals("Chongqing")
+                ? R.color.color_text_dark : R.color.color_text_light);
         TextView title = findViewById(R.id.municipalityName);
         title.setText(name);
+        title.setBackgroundColor(accent);
+        title.setTextColor(textColor);
+
+        ImageView photo = findViewById(R.id.municipalityImage);
+        photo.setImageResource(image);
+        photo.setContentDescription(getString(R.string.city_photo, name));
+
+        TextView information = findViewById(R.id.municipalityInfo);
+        information.setText(getResources().getStringArray(R.array.municipalities_array)[index]);
+        information.setTextColor(accent);
+        if (name.equals("Chongqing")) {
+            information.setBackgroundColor(ContextCompat.getColor(this, R.color.color_text_dark));
+            int padding = (int) (12 * getResources().getDisplayMetrics().density);
+            information.setPadding(padding, padding, padding, padding);
+        }
+
+        Button visitSite = findViewById(R.id.visitSiteButton);
+        visitSite.setBackgroundTintList(ColorStateList.valueOf(accent));
+        visitSite.setTextColor(textColor);
     }
 }
