@@ -1,6 +1,9 @@
 package com.example.practicalfive;
 
 import android.os.Bundle;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.content.res.ColorStateList;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -43,26 +46,31 @@ public class Municipality extends AppCompatActivity {
         int index;
         int image;
         int color;
+        int website;
         switch (name) {
             case "Beijing":
                 index = 0;
                 image = R.drawable.beijing;
                 color = R.color.municipality_beijing;
+                website = R.string.website_beijing;
                 break;
             case "Shanghai":
                 index = 1;
                 image = R.drawable.shanghai;
                 color = R.color.municipality_shanghai;
+                website = R.string.website_shanghai;
                 break;
             case "Chongqing":
                 index = 2;
                 image = R.drawable.chongqing;
                 color = R.color.municipality_chongqing;
+                website = R.string.website_chongqing;
                 break;
             case "Tianjin":
                 index = 3;
                 image = R.drawable.tianjin;
                 color = R.color.municipality_tianjin;
+                website = R.string.website_tianjin;
                 break;
             default:
                 finish();
@@ -93,5 +101,13 @@ public class Municipality extends AppCompatActivity {
         Button visitSite = findViewById(R.id.visitSiteButton);
         visitSite.setBackgroundTintList(ColorStateList.valueOf(accent));
         visitSite.setTextColor(textColor);
+        visitSite.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(website)));
+            try {
+                startActivity(intent);
+            } catch (ActivityNotFoundException exception) {
+                Toast.makeText(this, R.string.no_browser, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
